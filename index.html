@@ -12,6 +12,7 @@
   </head>
   <body>
     <header class="site-header">
+      <div class="scroll-progress" aria-hidden="true"></div>
       <a class="brand" href="#home" aria-label="Trần Xuân Bắc">
         <span>TXB</span>
         Trần Xuân Bắc
@@ -34,6 +35,23 @@
       <section id="home" class="hero">
         <img src="assets/backend-workspace.png" alt="Không gian làm việc backend với dashboard API và sơ đồ cơ sở dữ liệu.">
         <div class="hero__overlay"></div>
+        <div class="hero__hud" aria-hidden="true">
+          <div class="hud-panel hud-panel--primary">
+            <span>API health</span>
+            <strong>98.6%</strong>
+            <i></i>
+          </div>
+          <div class="hud-panel hud-panel--secondary">
+            <span>Response</span>
+            <strong>152ms</strong>
+            <i></i>
+          </div>
+          <div class="hud-panel hud-panel--tertiary">
+            <span>Deploy</span>
+            <strong>Ready</strong>
+            <i></i>
+          </div>
+        </div>
         <div class="hero__content">
           <p class="eyebrow">Backend Developer .NET / Intern Developer</p>
           <h1>Trần Xuân Bắc</h1>

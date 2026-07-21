@@ -1,6 +1,7 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector("#siteNav");
 const siteHeader = document.querySelector(".site-header");
+const scrollProgress = document.querySelector(".scroll-progress");
 const year = document.querySelector("#year");
 const sections = [...document.querySelectorAll("main section[id]")];
 const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
@@ -17,6 +18,12 @@ if (year) {
 function updateHeaderState() {
   if (!siteHeader) return;
   siteHeader.classList.toggle("is-scrolled", window.scrollY > 12);
+
+  if (scrollProgress) {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+    scrollProgress.style.setProperty("--scroll-progress", `${Math.min(progress, 100)}%`);
+  }
 }
 
 if (navToggle && siteNav) {

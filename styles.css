@@ -47,6 +47,22 @@ body::before {
   pointer-events: none;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  left: var(--cursor-x, 50%);
+  top: var(--cursor-y, 28%);
+  z-index: -1;
+  width: 420px;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle, rgba(112, 240, 178, 0.18), rgba(242, 204, 85, 0.08) 34%, transparent 68%);
+  opacity: 0.72;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 180ms ease-out, top 180ms ease-out;
+}
+
 body::selection {
   background: rgba(228, 174, 53, 0.34);
 }
@@ -243,6 +259,53 @@ p {
     repeating-linear-gradient(90deg, rgba(112, 240, 178, 0.06) 0 1px, transparent 1px 140px);
 }
 
+.hero__overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(112, 240, 178, 0.1), transparent);
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  transform: translateY(-100%);
+  animation: scanHero 6200ms ease-in-out infinite;
+}
+
+.hero__signal {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero__signal span {
+  position: absolute;
+  display: block;
+  width: 1px;
+  height: 180px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, rgba(112, 240, 178, 0.72), transparent);
+  box-shadow: 0 0 24px rgba(112, 240, 178, 0.42);
+  opacity: 0.62;
+  animation: signalDrop 5200ms linear infinite;
+}
+
+.hero__signal span:nth-child(1) {
+  left: 56%;
+  animation-delay: -1600ms;
+}
+
+.hero__signal span:nth-child(2) {
+  left: 72%;
+  height: 240px;
+  animation-delay: -3400ms;
+}
+
+.hero__signal span:nth-child(3) {
+  left: 88%;
+  animation-delay: -600ms;
+}
+
 .hero__content {
   position: relative;
   z-index: 2;
@@ -360,11 +423,28 @@ p {
 }
 
 .hero h1 {
+  position: relative;
   margin: 0;
   color: #ffffff;
   font-size: clamp(3.1rem, 8vw, 7.2rem);
   line-height: 0.95;
   text-shadow: 0 0 48px rgba(112, 240, 178, 0.18);
+}
+
+.hero h1::after {
+  content: "";
+  position: absolute;
+  left: 0.02em;
+  right: 0.08em;
+  bottom: 0.04em;
+  height: 0.14em;
+  z-index: -1;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(112, 240, 178, 0.72), rgba(242, 204, 85, 0.62), rgba(255, 111, 97, 0.52));
+  filter: blur(12px);
+  opacity: 0.7;
+  transform-origin: left;
+  animation: nameGlow 2600ms ease-in-out infinite;
 }
 
 .hero p:not(.eyebrow) {
@@ -426,9 +506,93 @@ p {
 }
 
 .button {
+  position: relative;
+  overflow: hidden;
   background: var(--accent);
   color: #06100d;
   padding: 0 18px;
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  inset: -60% -30%;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.64), transparent 62%);
+  transform: translateX(-70%);
+  transition: transform 620ms var(--ease-out);
+}
+
+.button:hover::after {
+  transform: translateX(70%);
+}
+
+.button span,
+.button {
+  isolation: isolate;
+}
+
+.recruiter-strip {
+  position: relative;
+  z-index: 2;
+  width: min(1160px, calc(100% - 40px));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: -46px auto 0;
+}
+
+.recruiter-strip article {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(170, 255, 218, 0.2);
+  border-radius: 8px;
+  background: rgba(8, 18, 15, 0.86);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  padding: 18px;
+  transform: translateY(0);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-out);
+}
+
+.recruiter-strip article::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(112, 240, 178, 0.16), transparent 50%, rgba(242, 204, 85, 0.12)),
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  transform: translateX(-100%);
+  transition: transform 700ms var(--ease-out);
+}
+
+.recruiter-strip article:hover {
+  border-color: rgba(242, 204, 85, 0.38);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-5px);
+}
+
+.recruiter-strip article:hover::before {
+  transform: translateX(100%);
+}
+
+.recruiter-strip span,
+.recruiter-strip strong {
+  position: relative;
+  display: block;
+}
+
+.recruiter-strip span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.recruiter-strip strong {
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: clamp(1rem, 2.2vw, 1.34rem);
+  line-height: 1.2;
 }
 
 .button:hover {
@@ -850,6 +1014,7 @@ dd {
 
 .project-card {
   overflow: hidden;
+  transform-style: preserve-3d;
 }
 
 .project-card__media {
@@ -896,6 +1061,10 @@ dd {
 
 .project-card:hover .project-card__media span {
   transform: scale(1.06);
+}
+
+.project-card.is-tilting {
+  transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-6px);
 }
 
 .project-card__body {
@@ -1101,6 +1270,41 @@ dd {
   }
 }
 
+@keyframes scanHero {
+  0%,
+  34% {
+    transform: translateY(-100%);
+  }
+
+  58%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes signalDrop {
+  from {
+    transform: translateY(-220px);
+  }
+
+  to {
+    transform: translateY(calc(100vh + 220px));
+  }
+}
+
+@keyframes nameGlow {
+  0%,
+  100% {
+    opacity: 0.52;
+    transform: scaleX(0.72);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: scaleX(1);
+  }
+}
+
 @media (max-width: 940px) {
   .skill-grid,
   .project-grid,
@@ -1114,6 +1318,11 @@ dd {
 
   .resume-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recruiter-strip {
+    grid-template-columns: 1fr;
+    margin-top: -28px;
   }
 
   .section__heading--row {
@@ -1181,6 +1390,10 @@ dd {
     display: none;
   }
 
+  .hero__signal span {
+    opacity: 0.34;
+  }
+
   .resume-grid {
     grid-template-columns: 1fr;
   }
@@ -1221,5 +1434,13 @@ dd {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  body::after,
+  .hero__overlay::after,
+  .hero__signal,
+  .hero h1::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

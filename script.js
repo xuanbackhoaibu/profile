@@ -7,9 +7,11 @@ const sections = [...document.querySelectorAll("main section[id]")];
 const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
 const revealTargets = [
   ...document.querySelectorAll(
-    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .resume-card, .skill-grid article, .project-card, .timeline article, .contact__layout > *, .contact-cta > *, .detail-grid article",
+    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .timeline article, .contact__layout > *, .contact-cta > *, .detail-grid article",
   ),
 ];
+const projectCards = [...document.querySelectorAll(".project-card")];
+const canAnimatePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -80,3 +82,32 @@ if ("IntersectionObserver" in window) {
 
 updateHeaderState();
 window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+if (canAnimatePointer) {
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      document.body.style.setProperty("--cursor-x", `${event.clientX}px`);
+      document.body.style.setProperty("--cursor-y", `${event.clientY}px`);
+    },
+    { passive: true },
+  );
+
+  projectCards.forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+      card.classList.add("is-tilting");
+      card.style.setProperty("--tilt-x", `${x * 7}deg`);
+      card.style.setProperty("--tilt-y", `${y * -7}deg`);
+    });
+
+    card.addEventListener("pointerleave", () => {
+      card.classList.remove("is-tilting");
+      card.style.removeProperty("--tilt-x");
+      card.style.removeProperty("--tilt-y");
+    });
+  });
+}

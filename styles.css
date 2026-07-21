@@ -10,6 +10,8 @@
   --coral: #cf5d4e;
   --navy: #132c35;
   --shadow: 0 20px 48px rgba(19, 44, 53, 0.12);
+  --shadow-lift: 0 28px 70px rgba(19, 44, 53, 0.18);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -25,6 +27,10 @@ body {
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--paper);
+}
+
+body::selection {
+  background: rgba(228, 174, 53, 0.34);
 }
 
 body.nav-open {
@@ -62,6 +68,13 @@ p {
   background: rgba(248, 250, 247, 0.88);
   border-bottom: 1px solid rgba(219, 228, 226, 0.75);
   backdrop-filter: blur(16px);
+  transition: min-height 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.site-header.is-scrolled {
+  min-height: 62px;
+  background: rgba(248, 250, 247, 0.95);
+  box-shadow: 0 12px 28px rgba(19, 44, 53, 0.08);
 }
 
 .brand {
@@ -69,6 +82,7 @@ p {
   align-items: center;
   gap: 10px;
   font-weight: 850;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .brand span,
@@ -82,6 +96,15 @@ p {
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 900;
+  transition: transform 220ms var(--ease-out), box-shadow 220ms ease;
+}
+
+.brand:hover {
+  color: var(--accent-dark);
+}
+
+.brand:hover span {
+  transform: rotate(-8deg) scale(1.04);
 }
 
 .site-nav {
@@ -91,16 +114,38 @@ p {
 }
 
 .site-nav a {
+  position: relative;
   border-radius: 8px;
   color: #334247;
   font-size: 0.94rem;
   font-weight: 750;
   padding: 10px 12px;
+  transition: color 180ms ease, background 180ms ease;
 }
 
-.site-nav a:hover {
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-out);
+}
+
+.site-nav a:hover,
+.site-nav a.is-active {
   background: rgba(15, 118, 110, 0.09);
   color: var(--accent-dark);
+}
+
+.site-nav a:hover::after,
+.site-nav a.is-active::after {
+  transform: scaleX(1);
 }
 
 .nav-toggle {
@@ -110,7 +155,9 @@ p {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #ffffff;
+  cursor: pointer;
   padding: 10px;
+  transition: background 180ms ease, border-color 180ms ease;
 }
 
 .nav-toggle span {
@@ -118,6 +165,19 @@ p {
   height: 2px;
   margin: 5px 0;
   background: var(--ink);
+  transition: transform 220ms var(--ease-out), opacity 180ms ease;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .hero {
@@ -127,6 +187,7 @@ p {
   align-items: center;
   overflow: hidden;
   padding: 112px max(20px, calc((100vw - 1160px) / 2)) 64px;
+  isolation: isolate;
 }
 
 .hero img {
@@ -135,6 +196,8 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.03);
+  animation: heroImageIn 1200ms var(--ease-out) both;
 }
 
 .hero__overlay {
@@ -148,6 +211,7 @@ p {
 .hero__content {
   position: relative;
   width: min(660px, 100%);
+  animation: heroContentIn 760ms 120ms var(--ease-out) both;
 }
 
 .eyebrow {
@@ -194,6 +258,12 @@ p {
   min-height: 44px;
   border-radius: 8px;
   font-weight: 850;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out),
+    box-shadow 180ms ease;
 }
 
 .button {
@@ -204,6 +274,8 @@ p {
 
 .button:hover {
   background: var(--accent-dark);
+  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.22);
+  transform: translateY(-2px);
 }
 
 .button--light {
@@ -226,6 +298,7 @@ p {
   width: min(1160px, calc(100% - 40px));
   margin: 0 auto;
   padding: 86px 0;
+  scroll-margin-top: 86px;
 }
 
 .section--tint {
@@ -280,6 +353,21 @@ p {
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--ease-out);
+}
+
+.profile-panel:hover,
+.contact-card:hover,
+.skill-grid article:hover,
+.project-card:hover,
+.timeline article:hover,
+.detail-grid article:hover {
+  border-color: rgba(15, 118, 110, 0.22);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-6px);
 }
 
 .profile-panel {
@@ -353,6 +441,13 @@ dd {
   font-size: 0.9rem;
   font-weight: 800;
   padding: 8px 11px;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms var(--ease-out);
+}
+
+.tag-list li:hover {
+  background: rgba(228, 174, 53, 0.15);
+  border-color: rgba(228, 174, 53, 0.36);
+  transform: translateY(-2px);
 }
 
 .text-link,
@@ -378,12 +473,27 @@ dd {
 }
 
 .project-card__media {
+  position: relative;
   min-height: 190px;
   display: grid;
   place-items: center;
   background:
     linear-gradient(135deg, rgba(15, 118, 110, 0.92), rgba(228, 174, 53, 0.72)),
     radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.32), transparent 30%);
+  overflow: hidden;
+}
+
+.project-card__media::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.28), transparent 65%);
+  transform: translateX(-50%) rotate(12deg);
+  transition: transform 700ms var(--ease-out);
+}
+
+.project-card:hover .project-card__media::before {
+  transform: translateX(50%) rotate(12deg);
 }
 
 .project-card__media--report {
@@ -393,9 +503,15 @@ dd {
 }
 
 .project-card__media span {
+  position: relative;
   color: rgba(255, 255, 255, 0.92);
   font-size: 4rem;
   font-weight: 950;
+  transition: transform 240ms var(--ease-out);
+}
+
+.project-card:hover .project-card__media span {
+  transform: scale(1.06);
 }
 
 .project-card__body {
@@ -443,6 +559,11 @@ dd {
   color: var(--accent-dark);
 }
 
+.project-actions a:hover {
+  border-color: rgba(207, 93, 78, 0.42);
+  transform: translateY(-2px);
+}
+
 .timeline {
   display: grid;
   gap: 18px;
@@ -469,6 +590,11 @@ dd {
   color: var(--accent-dark);
   font-weight: 800;
   padding-bottom: 12px;
+  transition: color 180ms ease, padding-left 180ms var(--ease-out);
+}
+
+.contact-card a:hover {
+  padding-left: 6px;
 }
 
 .contact-card a:last-child {
@@ -497,6 +623,7 @@ dd {
     #ffffff;
   border: 1px solid var(--line);
   padding: 32px;
+  animation: heroContentIn 620ms var(--ease-out) both;
 }
 
 .detail-hero p:last-child {
@@ -511,6 +638,58 @@ dd {
 
 .detail-grid article {
   padding: 24px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-grid article:nth-child(2),
+.project-grid article:nth-child(2),
+.timeline article:nth-child(2),
+.detail-grid article:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.skill-grid article:nth-child(3),
+.detail-grid article:nth-child(3) {
+  transition-delay: 140ms;
+}
+
+.skill-grid article:nth-child(4),
+.detail-grid article:nth-child(4) {
+  transition-delay: 200ms;
+}
+
+@keyframes heroContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroImageIn {
+  from {
+    filter: saturate(0.82) contrast(0.92);
+    transform: scale(1.08);
+  }
+
+  to {
+    filter: saturate(1) contrast(1);
+    transform: scale(1.03);
+  }
 }
 
 @media (max-width: 940px) {
@@ -541,22 +720,30 @@ dd {
   .site-nav {
     position: fixed;
     inset: 64px 12px auto;
-    display: none;
+    display: grid;
     border: 1px solid var(--line);
     border-radius: 8px;
     background: #ffffff;
     box-shadow: var(--shadow);
+    opacity: 0;
     padding: 10px;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 200ms ease, transform 220ms var(--ease-out);
   }
 
-  .site-nav.is-open,
-  .site-nav--static {
-    display: grid;
+  .site-nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .site-nav--static {
     position: static;
+    opacity: 1;
+    pointer-events: auto;
     box-shadow: none;
+    transform: none;
   }
 
   .site-nav a {
@@ -587,5 +774,20 @@ dd {
 
   .hero__actions .button {
     width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -375,6 +375,27 @@ p {
   line-height: 1.72;
 }
 
+.hero--resume {
+  min-height: 90vh;
+}
+
+.hero__content--resume {
+  width: min(760px, 100%);
+}
+
+.hero-role {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 42px;
+  border: 1px solid rgba(170, 255, 218, 0.22);
+  border-radius: 999px;
+  background: rgba(112, 240, 178, 0.08);
+  color: var(--accent-dark) !important;
+  font-weight: 900;
+  padding: 0 16px;
+}
+
 .hero__actions,
 .project-actions {
   display: flex;
@@ -476,6 +497,215 @@ p {
   align-items: start;
 }
 
+.profile-section {
+  padding-top: 72px;
+}
+
+.profile-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 26px;
+  align-items: stretch;
+}
+
+.identity-card,
+.objective-card,
+.resume-card,
+.contact-cta {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.identity-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: 24px;
+}
+
+.identity-card::before,
+.objective-card::before,
+.resume-card::before,
+.contact-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(112, 240, 178, 0.12), transparent 46%, rgba(255, 111, 97, 0.1));
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.portrait {
+  position: relative;
+  width: 164px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 7px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(242, 204, 85, 0.85), transparent 30%),
+    linear-gradient(135deg, var(--accent), var(--coral));
+  box-shadow: 0 28px 80px rgba(112, 240, 178, 0.22);
+}
+
+.portrait span {
+  color: #06100d;
+  font-size: 4.8rem;
+  font-weight: 950;
+}
+
+.identity-card h2,
+.identity-card p,
+.contact-list,
+.objective-card > *,
+.resume-card > *,
+.contact-cta > * {
+  position: relative;
+}
+
+.identity-card h2 {
+  margin: 4px 0 0;
+  font-size: 1.75rem;
+  line-height: 1.05;
+}
+
+.identity-card p {
+  margin: 0;
+  color: var(--accent-dark);
+  font-weight: 850;
+}
+
+.contact-list {
+  display: grid;
+  gap: 12px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-list li {
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid var(--line);
+  color: #dce9e5;
+  line-height: 1.45;
+  padding-top: 12px;
+}
+
+.contact-list span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact-list a {
+  color: inherit;
+}
+
+.profile-main {
+  display: grid;
+  align-content: start;
+}
+
+.objective-card {
+  position: relative;
+  padding: 26px;
+}
+
+.resume-section {
+  position: relative;
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.resume-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 190px;
+  padding: 22px;
+}
+
+.resume-card--education {
+  grid-column: span 2;
+}
+
+.resume-card h3 {
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-size: 1.2rem;
+}
+
+.resume-item {
+  display: grid;
+  gap: 8px;
+  color: #d1ded9;
+}
+
+.resume-item strong {
+  color: var(--accent-dark);
+  font-size: 1.05rem;
+}
+
+.resume-item span {
+  font-weight: 850;
+}
+
+.resume-item time {
+  color: var(--gold);
+  font-weight: 850;
+}
+
+.project-grid--featured {
+  align-items: stretch;
+}
+
+.project-type {
+  margin: 0 0 8px;
+  color: var(--gold) !important;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.project-card__media--sales {
+  background:
+    linear-gradient(135deg, rgba(112, 240, 178, 0.92), rgba(242, 204, 85, 0.82)),
+    radial-gradient(circle at 70% 28%, rgba(255, 255, 255, 0.32), transparent 30%);
+}
+
+.project-card__media--students {
+  background:
+    linear-gradient(135deg, rgba(12, 22, 19, 0.94), rgba(112, 240, 178, 0.72)),
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.2), transparent 32%);
+}
+
+.project-card__media--students span {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-cta {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: 28px;
+  align-items: center;
+  padding: 30px;
+}
+
 .about p,
 .contact p,
 .detail p {
@@ -489,7 +719,11 @@ p {
 .skill-grid article,
 .project-card,
 .timeline article,
-.detail-grid article {
+.detail-grid article,
+.identity-card,
+.objective-card,
+.resume-card,
+.contact-cta {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -506,7 +740,11 @@ p {
 .skill-grid article:hover,
 .project-card:hover,
 .timeline article:hover,
-.detail-grid article:hover {
+.detail-grid article:hover,
+.identity-card:hover,
+.objective-card:hover,
+.resume-card:hover,
+.contact-cta:hover {
   border-color: rgba(170, 255, 218, 0.28);
   box-shadow: var(--shadow-lift);
   transform: translateY(-6px);
@@ -868,8 +1106,14 @@ dd {
   .project-grid,
   .detail-grid,
   .about__layout,
-  .contact__layout {
+  .contact__layout,
+  .profile-shell,
+  .contact-cta {
     grid-template-columns: 1fr;
+  }
+
+  .resume-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .section__heading--row {
@@ -935,6 +1179,18 @@ dd {
 
   .hero__hud {
     display: none;
+  }
+
+  .resume-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-card--education {
+    grid-column: auto;
+  }
+
+  .portrait {
+    width: 136px;
   }
 
   .section {

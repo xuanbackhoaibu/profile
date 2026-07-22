@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV Trần Xuân Bắc | Backend .NET / System Analyst</title>
+    <style>
+      :root {
+        --ink: #14201c;
+        --muted: #60706b;
+        --line: #dce8e3;
+        --accent: #0f766e;
+        --gold: #a87911;
+        --paper: #ffffff;
+        --soft: #f3f8f6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #e9f2ef;
+        line-height: 1.58;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(16px);
+        padding: 12px;
+      }
+
+      .toolbar a,
+      .toolbar button {
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        color: var(--ink);
+        cursor: pointer;
+        font: inherit;
+        font-weight: 800;
+        padding: 0 14px;
+      }
+
+      .toolbar button {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      main {
+        width: min(940px, calc(100% - 32px));
+        margin: 28px auto;
+        background: var(--paper);
+        box-shadow: 0 24px 80px rgba(20, 32, 28, 0.16);
+      }
+
+      .cv {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: 1120px;
+      }
+
+      aside {
+        background: #10231f;
+        color: #f6fffb;
+        padding: 34px 28px;
+      }
+
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 116px;
+        aspect-ratio: 1;
+        border: 6px solid rgba(255, 255, 255, 0.92);
+        border-radius: 50%;
+        background: linear-gradient(135deg, #70f0b2, #ff6f61);
+        color: #06100d;
+        font-size: 3.4rem;
+        font-weight: 950;
+      }
+
+      aside h1 {
+        margin: 22px 0 8px;
+        font-size: 2rem;
+        line-height: 1.05;
+      }
+
+      aside p {
+        margin: 0;
+        color: #aafdda;
+        font-weight: 850;
+      }
+
+      .side-block {
+        margin-top: 28px;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-size: 1.05rem;
+        text-transform: uppercase;
+      }
+
+      aside h2 {
+        color: #f2cc55;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 7px 0;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .contact-list span {
+        display: block;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .contact-list a,
+      .contact-list strong {
+        color: #ffffff;
+        font-weight: 750;
+      }
+
+      .content {
+        padding: 34px;
+      }
+
+      .summary {
+        margin-top: 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      section {
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+        margin-top: 24px;
+      }
+
+      .item {
+        margin-top: 18px;
+      }
+
+      .item:first-of-type {
+        margin-top: 0;
+      }
+
+      .item h3 {
+        margin: 0 0 4px;
+        font-size: 1.08rem;
+      }
+
+      .item time,
+      .item .meta {
+        color: var(--gold);
+        font-weight: 850;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tags li {
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--accent);
+        font-size: 0.88rem;
+        font-weight: 800;
+        padding: 5px 9px;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          width: 100%;
+          margin: 0;
+        }
+
+        .cv {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        .toolbar {
+          display: none;
+        }
+
+        main {
+          width: 100%;
+          margin: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href="../index.html">Quay lại portfolio</a>
+      <button type="button" onclick="window.print()">In / Lưu PDF</button>
+    </div>
+
+    <main>
+      <div class="cv">
+        <aside>
+          <div class="avatar" aria-hidden="true">B</div>
+          <h1>Trần Xuân Bắc</h1>
+          <p>Backend .NET / System Analyst Intern</p>
+
+          <div class="side-block">
+            <h2>Liên hệ</h2>
+            <ul class="contact-list">
+              <li><span>Phone</span><strong>0367832701</strong></li>
+              <li><span>Email</span><a href="mailto:Bxuan964@gmail.com">Bxuan964@gmail.com</a></li>
+              <li><span>Address</span><strong>Gia Bình - Bắc Ninh</strong></li>
+              <li><span>Portfolio</span><a href="https://xuanbackhoaibu.github.io/profile/">xuanbackhoaibu.github.io/profile</a></li>
+              <li><span>GitHub</span><a href="https://github.com/xuanbackhoaibu/profile">github.com/xuanbackhoaibu/profile</a></li>
+            </ul>
+          </div>
+
+          <div class="side-block">
+            <h2>Kỹ năng chính</h2>
+            <ul>
+              <li>C#, ASP.NET Core, Web API</li>
+              <li>Entity Framework Core</li>
+              <li>SQL Server, MySQL, PostgreSQL</li>
+              <li>Use Case, ERD, API Testing</li>
+              <li>Git, GitHub, VS Code, Docker</li>
+            </ul>
+          </div>
+
+          <div class="side-block">
+            <h2>Định hướng</h2>
+            <ul>
+              <li>Backend Developer .NET</li>
+              <li>System Analyst</li>
+              <li>Software Testing / API Testing</li>
+            </ul>
+          </div>
+        </aside>
+
+        <div class="content">
+          <p class="summary">
+            Sinh viên Công nghệ thông tin định hướng Backend .NET và System Analysis. Có nền tảng
+            phân tích yêu cầu, Use Case, ERD, SQL, Web API và kinh nghiệm thực hiện các dự án quản lý
+            như ERP/Odoo, website bán hàng và hệ thống quản lý sinh viên.
+          </p>
+
+          <section>
+            <h2>Học vấn</h2>
+            <div class="item">
+              <h3>Công nghệ thông tin</h3>
+              <div class="meta">Trường Đại học Đại Nam</div>
+              <time>2023 - 2026</time>
+            </div>
+          </section>
+
+          <section>
+            <h2>Dự án nổi bật</h2>
+            <div class="item">
+              <h3>Hệ thống quản lý dự án trên Odoo</h3>
+              <div class="meta">Python · Odoo · PostgreSQL · XML · Gemini API</div>
+              <ul>
+                <li>Phân tích nghiệp vụ và xây dựng chức năng quản lý nhân sự, công việc, tiến độ và ngân sách.</li>
+                <li>Theo dõi rủi ro dự án, xây dựng chức năng AI tư vấn và xuất báo cáo PDF.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <h3>Nghiên cứu giao diện báo cáo công việc ClickUp</h3>
+              <div class="meta">Analysis · Wireframe · UI Report · Planning</div>
+              <ul>
+                <li>Phân tích nhu cầu người dùng, chỉ số báo cáo và luồng sử dụng giao diện.</li>
+                <li>Đề xuất wireframe, kế hoạch triển khai và công nghệ phát triển.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <h3>Dự án website bán hàng trực tuyến</h3>
+              <div class="meta">HTML · CSS · JavaScript · Bootstrap · ASP.NET · SQL Server</div>
+              <ul>
+                <li>Phân tích yêu cầu, thiết kế dữ liệu và xây dựng chức năng quản lý sản phẩm, giỏ hàng, đặt hàng.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <h3>Hệ thống quản lý sinh viên</h3>
+              <div class="meta">Use Case · ERD · SQL Server</div>
+              <ul>
+                <li>Phân tích yêu cầu, thiết kế Use Case, ERD và quản lý dữ liệu sinh viên, lớp học.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h2>Kỹ năng</h2>
+            <ul class="tags">
+              <li>C#</li>
+              <li>ASP.NET Core</li>
+              <li>Web API</li>
+              <li>Entity Framework Core</li>
+              <li>RESTful API</li>
+              <li>Python</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>SQL Server</li>
+              <li>MySQL</li>
+              <li>PostgreSQL</li>
+              <li>Postman</li>
+              <li>Git</li>
+              <li>Docker</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Mục tiêu</h2>
+            <ul>
+              <li>Tìm kiếm cơ hội thực tập Backend .NET hoặc System Analyst.</li>
+              <li>Phát triển vững về ASP.NET Core, Web API, cơ sở dữ liệu và quy trình làm việc thực tế.</li>
+              <li>Đóng góp vào các dự án quản lý, API, báo cáo và hệ thống web cho doanh nghiệp.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

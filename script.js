@@ -7,7 +7,7 @@ const sections = [...document.querySelectorAll("main section[id]")];
 const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
 const revealTargets = [
   ...document.querySelectorAll(
-    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .timeline article, .contact__layout > *, .contact-cta > *, .detail-grid article",
+    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article",
   ),
 ];
 const projectCards = [...document.querySelectorAll(".project-card")];
@@ -46,18 +46,17 @@ if (navToggle && siteNav) {
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
+    (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
       });
     },
-    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+    { threshold: 0.18, rootMargin: "0px 0px -10% 0px" },
   );
 
-  revealTargets.forEach((target) => {
+  revealTargets.forEach((target, index) => {
     target.classList.add("reveal");
+    target.style.setProperty("--reveal-delay", `${Math.min(index % 8, 5) * 70}ms`);
     revealObserver.observe(target);
   });
 

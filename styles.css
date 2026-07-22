@@ -1196,30 +1196,72 @@ dd {
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out);
+  filter: blur(10px);
+  transform: translate3d(0, 42px, 0) scale(0.98);
+  transition:
+    opacity 760ms var(--ease-out),
+    filter 760ms var(--ease-out),
+    transform 760ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, filter, transform;
+}
+
+.reveal:nth-child(even) {
+  transform: translate3d(0, 34px, 0) scale(0.985);
 }
 
 .reveal.is-visible {
   opacity: 1;
+  filter: blur(0);
   transform: translateY(0);
+}
+
+.section__heading.reveal {
+  transform: translate3d(-24px, 24px, 0);
+}
+
+.section__heading.reveal.is-visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.profile-shell > .reveal:first-child,
+.contact__layout > .reveal:first-child {
+  transform: translate3d(-34px, 24px, 0);
+}
+
+.profile-shell > .reveal:last-child,
+.contact__layout > .reveal:last-child {
+  transform: translate3d(34px, 24px, 0);
+}
+
+.profile-shell > .reveal.is-visible,
+.contact__layout > .reveal.is-visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.recruiter-strip article.reveal,
+.resume-card.reveal,
+.project-card.reveal,
+.timeline article.reveal,
+.contact-card a.reveal {
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .skill-grid article:nth-child(2),
 .project-grid article:nth-child(2),
 .timeline article:nth-child(2),
 .detail-grid article:nth-child(2) {
-  transition-delay: 80ms;
+  --reveal-delay: 80ms;
 }
 
 .skill-grid article:nth-child(3),
 .detail-grid article:nth-child(3) {
-  transition-delay: 140ms;
+  --reveal-delay: 140ms;
 }
 
 .skill-grid article:nth-child(4),
 .detail-grid article:nth-child(4) {
-  transition-delay: 200ms;
+  --reveal-delay: 200ms;
 }
 
 @keyframes heroContentIn {

@@ -1201,6 +1201,82 @@ dd {
   transform: translateY(-2px);
 }
 
+.academic-section {
+  margin-top: 0;
+}
+
+.academic-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.academic-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  padding: 24px;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--ease-out);
+}
+
+.academic-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(242, 204, 85, 0.12), transparent 48%, rgba(112, 240, 178, 0.12));
+  pointer-events: none;
+}
+
+.academic-card:hover {
+  border-color: rgba(242, 204, 85, 0.34);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-6px);
+}
+
+.academic-card__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  min-height: 132px;
+  border: 1px solid rgba(242, 204, 85, 0.34);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(242, 204, 85, 0.9), rgba(112, 240, 178, 0.72)),
+    radial-gradient(circle at 68% 24%, rgba(255, 255, 255, 0.32), transparent 30%);
+  color: #06100d;
+  font-size: 2.2rem;
+  font-weight: 950;
+}
+
+.academic-card > div:not(.academic-card__icon),
+.academic-card h3,
+.academic-card p,
+.academic-card ul,
+.academic-card .stack,
+.academic-card .project-actions {
+  position: relative;
+}
+
+.academic-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.28rem;
+}
+
+.academic-card p {
+  color: #c2d0cc;
+  line-height: 1.65;
+}
+
 .timeline {
   display: grid;
   gap: 18px;
@@ -1324,6 +1400,7 @@ dd {
 
 .recruiter-strip article.reveal,
 .fit-grid article.reveal,
+.academic-card.reveal,
 .resume-card.reveal,
 .project-card.reveal,
 .timeline article.reveal,
@@ -1434,6 +1511,7 @@ dd {
 @media (max-width: 940px) {
   .skill-grid,
   .fit-grid,
+  .academic-card,
   .project-grid,
   .detail-grid,
   .about__layout,

@@ -7,7 +7,7 @@ const sections = [...document.querySelectorAll("main section[id]")];
 const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
 const revealTargets = [
   ...document.querySelectorAll(
-    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .fit-grid article, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article",
+    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .fit-grid article, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .academic-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article",
   ),
 ];
 const projectCards = [...document.querySelectorAll(".project-card")];

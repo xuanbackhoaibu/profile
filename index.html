@@ -8,7 +8,7 @@
       name="description"
       content="Portfolio và CV cá nhân của Trần Xuân Bắc, định hướng Chuyên viên phân tích hệ thống và Backend .NET."
     >
-    <link rel="stylesheet" href="styles.css?v=20260724-profile-photo">
+    <link rel="stylesheet" href="styles.css?v=20260724-3d-ui-2">
   </head>
   <body>
     <header class="site-header">
@@ -35,6 +35,14 @@
       <section id="home" class="hero hero--resume">
         <img src="assets/backend-workspace.png" alt="Không gian làm việc công nghệ với dashboard và sơ đồ hệ thống.">
         <div class="hero__overlay"></div>
+        <div class="hero__scene" aria-hidden="true">
+          <canvas id="heroCanvas"></canvas>
+          <div class="scene-fallback">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <div class="hero__signal" aria-hidden="true">
           <span></span>
           <span></span>
@@ -60,7 +68,7 @@
         <div class="hero__content hero__content--resume">
           <p class="eyebrow">Portfolio / Curriculum Vitae</p>
           <h1>Trần Xuân Bắc</h1>
-          <p class="hero-role">Chuyên viên phân tích hệ thống / Backend Developer .NET</p>
+          <p class="hero-role">Chuyên viên phân tích hệ thống / <span class="hero-role__tail">Backend Developer .NET</span></p>
           <p>
             Sinh viên CNTT định hướng Backend .NET và System Analysis. Tôi tập trung vào
             phân tích nghiệp vụ, thiết kế Use Case/ERD, xây dựng Web API, làm việc với SQL
@@ -475,6 +483,6 @@
       <p>© <span id="year"></span> Trần Xuân Bắc. Portfolio cá nhân.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js?v=20260724-3d-ui-2"></script>
   </body>
 </html>

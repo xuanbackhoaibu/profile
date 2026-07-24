@@ -12,6 +12,9 @@
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
   --shadow-lift: 0 34px 110px rgba(0, 0, 0, 0.48);
   --glass: rgba(255, 255, 255, 0.055);
+  --depth-x: 0px;
+  --depth-y: 0px;
+  --hero-scroll: 0;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -34,6 +37,7 @@ body {
     radial-gradient(circle at 14% 24%, rgba(112, 240, 178, 0.12), transparent 24%),
     var(--paper);
   background-size: 42px 42px, 42px 42px, auto, auto, auto;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -90,7 +94,7 @@ p {
 
 .site-header {
   position: fixed;
-  z-index: 10;
+  z-index: 30;
   top: 0;
   left: 0;
   right: 0;
@@ -250,6 +254,7 @@ p {
   overflow: hidden;
   padding: 112px max(20px, calc((100vw - 1160px) / 2)) 64px;
   isolation: isolate;
+  perspective: 1200px;
 }
 
 .hero img {
@@ -260,17 +265,74 @@ p {
   object-fit: cover;
   opacity: 0.42;
   mix-blend-mode: screen;
-  transform: scale(1.03);
+  transform: scale(1.04) translate3d(calc(var(--depth-x) * -0.45), calc(var(--depth-y) * -0.35), 0);
   animation: heroImageIn 1200ms var(--ease-out) both;
+  will-change: transform;
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(6, 8, 7, 0.98), rgba(6, 8, 7, 0.78) 48%, rgba(6, 8, 7, 0.28)),
+    radial-gradient(circle at calc(52% + var(--depth-x)) calc(28% + var(--depth-y)), rgba(112, 240, 178, 0.16), transparent 26%),
+    linear-gradient(90deg, rgba(6, 8, 7, 0.98), rgba(6, 8, 7, 0.76) 46%, rgba(6, 8, 7, 0.24)),
     linear-gradient(0deg, var(--paper), transparent 18%),
     repeating-linear-gradient(90deg, rgba(112, 240, 178, 0.06) 0 1px, transparent 1px 140px);
+}
+
+.hero__scene {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(calc(var(--depth-x) * 0.22), calc(var(--depth-y) * 0.18), 0);
+}
+
+#heroCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.82;
+  mix-blend-mode: screen;
+}
+
+.scene-fallback {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.scene-fallback span {
+  position: absolute;
+  width: clamp(120px, 15vw, 220px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(170, 255, 218, 0.2);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(112, 240, 178, 0.12), rgba(242, 204, 85, 0.08)),
+    rgba(255, 255, 255, 0.035);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transform: rotateX(64deg) rotateZ(42deg);
+  animation: orbitTile 9000ms ease-in-out infinite;
+}
+
+.scene-fallback span:nth-child(1) {
+  right: 14%;
+  top: 16%;
+}
+
+.scene-fallback span:nth-child(2) {
+  right: 28%;
+  bottom: 18%;
+  animation-delay: -2800ms;
+}
+
+.scene-fallback span:nth-child(3) {
+  right: 4%;
+  bottom: 32%;
+  animation-delay: -5600ms;
 }
 
 .hero__overlay::after {
@@ -322,9 +384,12 @@ p {
 
 .hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: min(660px, 100%);
   animation: heroContentIn 760ms 120ms var(--ease-out) both;
+  transform: translate3d(calc(var(--depth-x) * 0.14), calc(var(--depth-y) * 0.1), 42px);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .hero__content::before {
@@ -340,12 +405,15 @@ p {
 
 .hero__hud {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   right: max(20px, calc((100vw - 1160px) / 2));
   top: 24%;
   width: min(380px, 36vw);
   min-height: 360px;
   pointer-events: none;
+  transform: translate3d(calc(var(--depth-x) * 0.42), calc(var(--depth-y) * 0.3), 80px) rotateX(7deg) rotateY(-11deg);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .hud-panel {
@@ -357,7 +425,8 @@ p {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px);
   padding: 18px;
-  animation: floatPanel 5200ms ease-in-out infinite;
+  transform-style: preserve-3d;
+  animation: floatPanel3d 5200ms ease-in-out infinite;
 }
 
 .hud-panel::before {
@@ -478,9 +547,9 @@ p {
 }
 
 .hero-role {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   width: fit-content;
+  max-width: 100%;
   min-height: 42px;
   border: 1px solid rgba(170, 255, 218, 0.22);
   border-radius: 999px;
@@ -488,6 +557,11 @@ p {
   color: var(--accent-dark) !important;
   font-weight: 900;
   padding: 0 16px;
+  line-height: 1.35 !important;
+}
+
+.hero-role__tail {
+  display: inline;
 }
 
 .hero__actions,
@@ -553,6 +627,7 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   margin: -46px auto 0;
+  perspective: 1000px;
 }
 
 .recruiter-strip article {
@@ -565,6 +640,7 @@ p {
   backdrop-filter: blur(18px);
   padding: 18px;
   transform: translateY(0);
+  transform-style: preserve-3d;
   transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-out);
 }
 
@@ -582,7 +658,7 @@ p {
 .recruiter-strip article:hover {
   border-color: rgba(242, 204, 85, 0.38);
   box-shadow: var(--shadow-lift);
-  transform: translateY(-5px);
+  transform: translateY(-7px) rotateX(5deg) rotateY(-5deg);
 }
 
 .recruiter-strip article:hover::before {
@@ -637,6 +713,7 @@ p {
   margin: 0 auto;
   padding: 86px 0;
   scroll-margin-top: 86px;
+  position: relative;
 }
 
 .section--tint {
@@ -684,6 +761,7 @@ p {
   grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: 26px;
   align-items: stretch;
+  perspective: 1200px;
 }
 
 .identity-card,
@@ -695,6 +773,7 @@ p {
   background: var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
+  transform-style: preserve-3d;
 }
 
 .identity-card {
@@ -704,6 +783,7 @@ p {
   align-content: start;
   gap: 16px;
   padding: 24px;
+  transform: translateZ(0);
 }
 
 .identity-card::before,
@@ -732,6 +812,17 @@ p {
     radial-gradient(circle at 34% 28%, rgba(242, 204, 85, 0.85), transparent 30%),
     linear-gradient(135deg, var(--accent), var(--coral));
   box-shadow: 0 28px 80px rgba(112, 240, 178, 0.22);
+  transform: translateZ(34px);
+}
+
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border: 1px solid rgba(112, 240, 178, 0.36);
+  border-radius: inherit;
+  animation: portraitRing 4200ms ease-in-out infinite;
+  pointer-events: none;
 }
 
 .portrait img {
@@ -808,6 +899,7 @@ p {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
+  perspective: 1000px;
 }
 
 .fit-grid article {
@@ -820,6 +912,7 @@ p {
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
   padding: 22px;
+  transform-style: preserve-3d;
   transition:
     border-color 220ms ease,
     box-shadow 220ms ease,
@@ -838,7 +931,7 @@ p {
 .fit-grid article:hover {
   border-color: rgba(242, 204, 85, 0.34);
   box-shadow: var(--shadow-lift);
-  transform: translateY(-6px);
+  transform: translateY(-8px) rotateX(4deg);
 }
 
 .fit-grid span,
@@ -878,6 +971,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  perspective: 1100px;
 }
 
 .resume-card {
@@ -885,6 +979,20 @@ p {
   overflow: hidden;
   min-height: 190px;
   padding: 22px;
+}
+
+.resume-card::after,
+.project-card::after,
+.academic-card::after,
+.timeline article::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 0%), rgba(255, 255, 255, 0.18), transparent 34%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
 }
 
 .resume-card--education {
@@ -978,6 +1086,7 @@ p {
   background: var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
+  transform-style: preserve-3d;
   transition:
     border-color 220ms ease,
     box-shadow 220ms ease,
@@ -996,7 +1105,7 @@ p {
 .contact-cta:hover {
   border-color: rgba(170, 255, 218, 0.28);
   box-shadow: var(--shadow-lift);
-  transform: translateY(-6px);
+  transform: translateY(-7px) translateZ(18px);
 }
 
 .profile-panel {
@@ -1095,6 +1204,7 @@ dd {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
+  perspective: 1200px;
 }
 
 .project-card {
@@ -1138,6 +1248,7 @@ dd {
   font-size: 4rem;
   font-weight: 950;
   transition: transform 240ms var(--ease-out);
+  transform: translateZ(42px);
 }
 
 .project-card__media--report span {
@@ -1145,11 +1256,18 @@ dd {
 }
 
 .project-card:hover .project-card__media span {
-  transform: scale(1.06);
+  transform: translateZ(60px) scale(1.06);
 }
 
 .project-card.is-tilting {
-  transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-6px);
+  transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-8px) translateZ(22px);
+}
+
+.project-card.is-tilting::after,
+.resume-card:hover::after,
+.academic-card:hover::after,
+.timeline article:hover::after {
+  opacity: 1;
 }
 
 .project-card__body {
@@ -1223,6 +1341,7 @@ dd {
 .academic-grid {
   display: grid;
   gap: 18px;
+  perspective: 1200px;
 }
 
 .academic-card {
@@ -1237,6 +1356,7 @@ dd {
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
   padding: 24px;
+  transform-style: preserve-3d;
   transition:
     border-color 220ms ease,
     box-shadow 220ms ease,
@@ -1254,7 +1374,7 @@ dd {
 .academic-card:hover {
   border-color: rgba(242, 204, 85, 0.34);
   box-shadow: var(--shadow-lift);
-  transform: translateY(-6px);
+  transform: translateY(-8px) rotateX(3deg);
 }
 
 .academic-card__icon {
@@ -1271,6 +1391,7 @@ dd {
   color: #06100d;
   font-size: 2.2rem;
   font-weight: 950;
+  transform: translateZ(34px);
 }
 
 .academic-card > div:not(.academic-card__icon),
@@ -1295,9 +1416,12 @@ dd {
 .timeline {
   display: grid;
   gap: 18px;
+  perspective: 1000px;
 }
 
 .timeline article {
+  position: relative;
+  overflow: hidden;
   padding: 24px;
 }
 
@@ -1371,23 +1495,23 @@ dd {
 .reveal {
   opacity: 0;
   filter: blur(10px);
-  transform: translate3d(0, 42px, 0) scale(0.98);
+  transform: translate3d(0, 56px, -80px) rotateX(8deg) scale(0.96);
   transition:
-    opacity 760ms var(--ease-out),
-    filter 760ms var(--ease-out),
-    transform 760ms var(--ease-out);
+    opacity 820ms var(--ease-out),
+    filter 820ms var(--ease-out),
+    transform 820ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, filter, transform;
 }
 
 .reveal:nth-child(even) {
-  transform: translate3d(0, 34px, 0) scale(0.985);
+  transform: translate3d(0, 42px, -60px) rotateY(-7deg) scale(0.97);
 }
 
 .reveal.is-visible {
   opacity: 1;
   filter: blur(0);
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) scale(1);
 }
 
 .section__heading.reveal {
@@ -1443,24 +1567,36 @@ dd {
 @keyframes heroContentIn {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translate3d(calc(var(--depth-x) * 0.14), calc(24px + var(--depth-y) * 0.1), 42px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(calc(var(--depth-x) * 0.14), calc(var(--depth-y) * 0.1), 42px);
   }
 }
 
 @keyframes heroImageIn {
   from {
     filter: saturate(0.82) contrast(0.92);
-    transform: scale(1.08);
+    transform: scale(1.08) translate3d(calc(var(--depth-x) * -0.45), calc(var(--depth-y) * -0.35), 0);
   }
 
   to {
     filter: saturate(1) contrast(1);
-    transform: scale(1.03);
+    transform: scale(1.04) translate3d(calc(var(--depth-x) * -0.45), calc(var(--depth-y) * -0.35), 0);
+  }
+}
+
+@keyframes heroContentInFlat {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -1472,6 +1608,43 @@ dd {
 
   50% {
     transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes floatPanel3d {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -16px, 36px) rotateX(5deg) rotateY(-5deg);
+  }
+}
+
+@keyframes orbitTile {
+  0%,
+  100% {
+    opacity: 0.24;
+    transform: rotateX(64deg) rotateZ(42deg) translate3d(0, 0, -40px);
+  }
+
+  50% {
+    opacity: 0.58;
+    transform: rotateX(64deg) rotateZ(42deg) translate3d(20px, -26px, 60px);
+  }
+}
+
+@keyframes portraitRing {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.94);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
   }
 }
 
@@ -1600,6 +1773,36 @@ dd {
     padding-top: 92px;
   }
 
+  .hero__content {
+    animation-name: heroContentInFlat;
+    transform: none;
+    width: min(100%, calc(100vw - 64px));
+    max-width: calc(100vw - 64px);
+    min-width: 0;
+  }
+
+  .hero p:not(.eyebrow) {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 15vw, 4.4rem);
+  }
+
+  .hero-role {
+    display: block;
+    width: 100%;
+    min-height: auto;
+    border-radius: 14px;
+    padding: 10px 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-role__tail {
+    display: block;
+  }
+
   .hero__overlay {
     background:
       linear-gradient(90deg, rgba(6, 8, 7, 0.98), rgba(6, 8, 7, 0.84)),
@@ -1607,6 +1810,29 @@ dd {
   }
 
   .hero__hud {
+    display: none;
+  }
+
+  .hero__scene {
+    opacity: 0.52;
+  }
+
+  .scene-fallback span {
+    right: auto;
+    width: 128px;
+  }
+
+  .scene-fallback span:nth-child(1) {
+    left: 58%;
+    top: 16%;
+  }
+
+  .scene-fallback span:nth-child(2) {
+    left: 70%;
+    bottom: 20%;
+  }
+
+  .scene-fallback span:nth-child(3) {
     display: none;
   }
 
@@ -1659,8 +1885,18 @@ dd {
   body::after,
   .hero__overlay::after,
   .hero__signal,
-  .hero h1::after {
+  .hero h1::after,
+  .scene-fallback,
+  #heroCanvas {
     animation: none !important;
     transition: none !important;
+  }
+
+  .hero__content,
+  .hero__hud,
+  .hero img,
+  .hero__scene,
+  .project-card.is-tilting {
+    transform: none !important;
   }
 }

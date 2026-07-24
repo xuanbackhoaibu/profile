@@ -130,7 +130,6 @@ p {
   transition: color 180ms ease, transform 180ms ease;
 }
 
-.brand img,
 .avatar {
   display: grid;
   place-items: center;
@@ -147,17 +146,26 @@ p {
   transition: transform 220ms var(--ease-out), box-shadow 220ms ease;
 }
 
-.brand img {
+.brand__photo {
+  display: block;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  max-width: 42px;
+  max-height: 42px;
   border: 2px solid rgba(255, 255, 255, 0.82);
+  border-radius: 50%;
+  box-shadow: 0 0 28px rgba(112, 240, 178, 0.24);
   object-fit: cover;
   object-position: center 28%;
+  transition: transform 220ms var(--ease-out), box-shadow 220ms ease;
 }
 
 .brand:hover {
   color: var(--accent-dark);
 }
 
-.brand:hover img {
+.brand:hover .brand__photo {
   transform: rotate(-8deg) scale(1.04);
 }
 

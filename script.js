@@ -7,21 +7,32 @@ const sections = [...document.querySelectorAll("main section[id]")];
 const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
 const hero = document.querySelector(".hero");
 const heroCanvas = document.querySelector("#heroCanvas");
+const contentSections = [...document.querySelectorAll(".section")];
 const revealTargets = [
   ...document.querySelectorAll(
-    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .fit-grid article, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .academic-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article",
+    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .fit-grid article, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .academic-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article, .tag-list li, .project-actions > *",
   ),
 ];
 const projectCards = [...document.querySelectorAll(".project-card")];
 const depthCards = [
-  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .timeline article"),
+  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .timeline article, .identity-card, .objective-card, .fit-grid article, .contact-cta, .contact-card"),
 ];
+const shineTargets = [
+  ...depthCards,
+  ...document.querySelectorAll(".button, .project-actions a, .text-link, .back-link"),
+];
+const tagItems = [...document.querySelectorAll(".tag-list li")];
+const timelines = [...document.querySelectorAll(".timeline")];
 const canAnimatePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (year) {
   year.textContent = new Date().getFullYear();
 }
+
+tagItems.forEach((tag, index) => {
+  tag.style.setProperty("--tag-index", index % 12);
+});
 
 function updateHeaderState() {
   if (!siteHeader) return;
@@ -38,6 +49,13 @@ function updateHeaderState() {
     const scrollRatio = Math.min(window.scrollY / heroHeight, 1);
     document.documentElement.style.setProperty("--hero-scroll", scrollRatio.toFixed(3));
   }
+
+  timelines.forEach((timeline) => {
+    const rect = timeline.getBoundingClientRect();
+    const viewport = window.innerHeight || 1;
+    const progress = 1 - Math.max(Math.min((rect.bottom - viewport * 0.72) / (rect.height + viewport * 0.18), 1), 0);
+    timeline.style.setProperty("--timeline-progress", Math.max(progress, 0.18).toFixed(3));
+  });
 }
 
 if (navToggle && siteNav) {
@@ -87,8 +105,22 @@ if ("IntersectionObserver" in window) {
 
     sections.forEach((section) => navObserver.observe(section));
   }
+
+  if (contentSections.length > 0) {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("section-in-view", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.18 },
+    );
+
+    contentSections.forEach((section) => sectionObserver.observe(section));
+  }
 } else {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
+  contentSections.forEach((section) => section.classList.add("section-in-view"));
 }
 
 updateHeaderState();
@@ -133,13 +165,28 @@ if (canAnimatePointer) {
     });
   });
 
-  depthCards.forEach((card) => {
-    card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
+  shineTargets.forEach((target) => {
+    target.addEventListener("pointermove", (event) => {
+      const rect = target.getBoundingClientRect();
       const x = ((event.clientX - rect.left) / rect.width) * 100;
       const y = ((event.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty("--shine-x", `${x}%`);
-      card.style.setProperty("--shine-y", `${y}%`);
+      target.style.setProperty("--shine-x", `${x}%`);
+      target.style.setProperty("--shine-y", `${y}%`);
+    });
+
+    target.addEventListener("pointerleave", () => {
+      target.style.removeProperty("--shine-x");
+      target.style.removeProperty("--shine-y");
+    });
+  });
+
+  contentSections.forEach((section) => {
+    section.addEventListener("pointermove", (event) => {
+      const rect = section.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      section.style.setProperty("--section-x", `${x}%`);
+      section.style.setProperty("--section-y", `${y}%`);
     });
   });
 }

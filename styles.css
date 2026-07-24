@@ -130,7 +130,7 @@ p {
   transition: color 180ms ease, transform 180ms ease;
 }
 
-.brand span,
+.brand img,
 .avatar {
   display: grid;
   place-items: center;
@@ -147,11 +147,17 @@ p {
   transition: transform 220ms var(--ease-out), box-shadow 220ms ease;
 }
 
+.brand img {
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  object-fit: cover;
+  object-position: center 28%;
+}
+
 .brand:hover {
   color: var(--accent-dark);
 }
 
-.brand:hover span {
+.brand:hover img {
   transform: rotate(-8deg) scale(1.04);
 }
 

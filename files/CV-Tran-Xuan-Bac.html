@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CV Trần Xuân Bắc | Backend .NET / System Analyst</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <style>
       :root {
         --ink: #14201c;
@@ -196,6 +197,25 @@
         font-weight: 850;
       }
 
+      .evidence {
+        display: grid;
+        gap: 6px;
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .evidence li {
+        margin: 0;
+        border-left: 3px solid var(--accent);
+        background: var(--soft);
+        padding: 7px 10px;
+      }
+
+      .evidence strong {
+        color: var(--accent);
+      }
+
       .tags {
         display: flex;
         flex-wrap: wrap;
@@ -247,6 +267,7 @@
   <body>
     <div class="toolbar">
       <a href="../index.html">Quay lại portfolio</a>
+      <a href="CV-Tran-Xuan-Bac.pdf" download>Tải CV PDF</a>
       <button type="button" onclick="window.print()">In / Lưu PDF</button>
     </div>
 
@@ -317,6 +338,10 @@
             <div class="item">
               <h3>Hệ thống quản lý dự án trên Odoo</h3>
               <div class="meta">Python · Odoo · PostgreSQL · XML · Gemini API</div>
+              <ul class="evidence">
+                <li><strong>Vai trò:</strong> Phân tích nghiệp vụ, thiết kế module Odoo, xử lý dữ liệu và báo cáo.</li>
+                <li><strong>Kết quả:</strong> Mô phỏng được quy trình quản lý dự án, tiến độ, ngân sách và rủi ro.</li>
+              </ul>
               <ul>
                 <li>Phân tích nghiệp vụ và xây dựng chức năng quản lý nhân sự, công việc, tiến độ và ngân sách.</li>
                 <li>Theo dõi rủi ro dự án, xây dựng chức năng AI tư vấn và xuất báo cáo PDF.</li>
@@ -325,6 +350,10 @@
             <div class="item">
               <h3>Nghiên cứu giao diện báo cáo công việc ClickUp</h3>
               <div class="meta">Analysis · Wireframe · UI Report · Planning</div>
+              <ul class="evidence">
+                <li><strong>Vai trò:</strong> Nghiên cứu UX, xác định chỉ số báo cáo, dựng wireframe và luồng sử dụng.</li>
+                <li><strong>Kết quả:</strong> Có tài liệu giao diện báo cáo để trao đổi yêu cầu và triển khai.</li>
+              </ul>
               <ul>
                 <li>Phân tích nhu cầu người dùng, chỉ số báo cáo và luồng sử dụng giao diện.</li>
                 <li>Đề xuất wireframe, kế hoạch triển khai và công nghệ phát triển.</li>
@@ -333,6 +362,10 @@
             <div class="item">
               <h3>Dự án website bán hàng trực tuyến</h3>
               <div class="meta">.NET 9 · ASP.NET Core MVC · Razor Pages · EF Core · SQL Server · Identity · SignalR · Bootstrap · jQuery · Gemini API</div>
+              <ul class="evidence">
+                <li><strong>Vai trò:</strong> Xây dựng backend MVC, thiết kế dữ liệu, phân quyền, đơn hàng, thanh toán và chatbot.</li>
+                <li><strong>Kết quả:</strong> Hoàn thiện nhiều luồng chính của website bán hàng và khu vực quản trị.</li>
+              </ul>
               <ul>
                 <li>Xây dựng website bán hàng thời trang với sản phẩm, biến thể, hình ảnh, danh mục, giỏ hàng, wishlist và đánh giá.</li>
                 <li>Phát triển luồng đặt hàng, kiểm tra tồn kho, quản lý đơn hàng và các phương thức thanh toán COD, VNPay, MoMo, VietQR.</li>
@@ -344,6 +377,10 @@
             <div class="item">
               <h3>Hệ thống quản lý sinh viên</h3>
               <div class="meta">Use Case · ERD · SQL Server</div>
+              <ul class="evidence">
+                <li><strong>Vai trò:</strong> Phân tích yêu cầu, thiết kế Use Case/ERD và mô hình dữ liệu SQL Server.</li>
+                <li><strong>Kết quả:</strong> Có thiết kế dữ liệu phục vụ quản lý sinh viên, lớp học và thông tin học tập.</li>
+              </ul>
               <ul>
                 <li>Phân tích yêu cầu, thiết kế Use Case, ERD và quản lý dữ liệu sinh viên, lớp học.</li>
               </ul>
@@ -351,6 +388,10 @@
             <div class="item">
               <h3>Bài tập lớn khai phá dữ liệu dự đoán kết quả học tập học sinh</h3>
               <div class="meta">Python · pandas · scikit-learn · mlxtend · matplotlib · seaborn · Apriori · KMeans · Random Forest</div>
+              <ul class="evidence">
+                <li><strong>Vai trò:</strong> Làm sạch dữ liệu, EDA, feature engineering, huấn luyện mô hình và đánh giá kết quả.</li>
+                <li><strong>Kết quả:</strong> Xây dựng pipeline khai phá dữ liệu có phân cụm, luật kết hợp và mô hình phân loại.</li>
+              </ul>
               <ul>
                 <li>Phân tích bộ dữ liệu Student Performance từ UCI để dự đoán học sinh đậu/rớt dựa trên thông tin học tập, hành vi và đặc điểm cá nhân.</li>
                 <li>Thực hiện EDA, xử lý trùng lặp, encoding biến phân loại, scaling dữ liệu số và stratified train/test split.</li>
@@ -362,6 +403,10 @@
             <div class="item">
               <h3>Scant Reports - hệ thống upload dữ liệu và xuất báo cáo</h3>
               <div class="meta">Python · SQLite · CSV/XLSX Processing · HTML Templates · DOCX/PDF Export · Docker · Unit Test</div>
+              <ul class="evidence">
+                <li><strong>Vai trò:</strong> Tự phát triển backend, xử lý upload dữ liệu, phân quyền, xuất báo cáo và đóng gói deploy.</li>
+                <li><strong>Kết quả:</strong> Tạo ứng dụng báo cáo có đăng nhập, xử lý CSV/XLSX, export đa định dạng và tài liệu vận hành.</li>
+              </ul>
               <ul>
                 <li>Tự phát triển web app nội bộ cho phép đăng ký, đăng nhập, upload CSV/XLSX và tự động tổng hợp dữ liệu thành báo cáo.</li>
                 <li>Xây dựng phân quyền admin/user, quản lý tài khoản, khóa/mở tài khoản, đổi mật khẩu và reset mật khẩu.</li>

@@ -10,15 +10,15 @@ const heroCanvas = document.querySelector("#heroCanvas");
 const contentSections = [...document.querySelectorAll(".section")];
 const revealTargets = [
   ...document.querySelectorAll(
-    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .career-grid article, .fit-grid article, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .academic-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article, .tag-list li, .project-actions > *",
+    ".section__heading, .about__layout > *, .profile-shell > *, .objective-card, .availability-panel, .availability-intro, .availability-grid article, .career-grid article, .fit-grid article, .resume-card, .recruiter-strip article, .skill-grid article, .project-card, .academic-card, .timeline article, .contact__layout > *, .contact-cta > *, .contact-card a, .detail-grid article, .tag-list li, .project-actions > *",
   ),
 ];
 const projectCards = [...document.querySelectorAll(".project-card")];
 const depthCards = [
-  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .timeline article, .identity-card, .objective-card, .career-grid article, .fit-grid article, .contact-cta, .contact-card"),
+  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .timeline article, .identity-card, .objective-card, .availability-panel, .availability-grid article, .career-grid article, .fit-grid article, .contact-cta, .contact-card"),
 ];
 const tiltCards = [
-  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .career-grid article, .fit-grid article, .identity-card, .objective-card"),
+  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .availability-grid article, .career-grid article, .fit-grid article, .identity-card, .objective-card"),
 ];
 const shineTargets = [
   ...depthCards,

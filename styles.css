@@ -1104,6 +1104,97 @@ p {
   line-height: 1.65;
 }
 
+.availability-section {
+  padding-bottom: 72px;
+}
+
+.availability-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.55fr);
+  gap: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(170, 255, 218, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(12, 27, 23, 0.94), rgba(8, 14, 13, 0.86)),
+    radial-gradient(circle at 12% 20%, rgba(112, 240, 178, 0.12), transparent 32%);
+  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.3);
+  padding: 22px;
+  transform-style: preserve-3d;
+}
+
+.availability-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.06) 46%, transparent 58%);
+  transform: translateX(-120%);
+  transition: transform 900ms var(--ease-out);
+  pointer-events: none;
+}
+
+.availability-panel:hover::before {
+  transform: translateX(120%);
+}
+
+.availability-intro,
+.availability-grid article {
+  position: relative;
+  border: 1px solid rgba(170, 255, 218, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 22px;
+}
+
+.availability-intro {
+  display: grid;
+  align-content: center;
+  min-height: 250px;
+}
+
+.availability-intro span,
+.availability-grid span {
+  color: var(--accent-dark);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.availability-intro p {
+  margin: 16px 0 0;
+  color: #d6e3df;
+  font-size: clamp(1rem, 2vw, 1.16rem);
+  line-height: 1.72;
+}
+
+.availability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.availability-grid article {
+  min-height: 118px;
+  transform-style: preserve-3d;
+  transition: border-color 220ms ease, background 220ms ease, transform 220ms var(--ease-out);
+}
+
+.availability-grid article:hover {
+  border-color: rgba(242, 204, 85, 0.28);
+  background: rgba(255, 255, 255, 0.065);
+  transform: translateY(-4px) translateZ(14px);
+}
+
+.availability-grid strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: clamp(0.98rem, 1.8vw, 1.16rem);
+  line-height: 1.5;
+}
+
 .fit-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2107,6 +2198,7 @@ dd {
   .skill-grid,
   .fit-grid,
   .career-grid,
+  .availability-panel,
   .academic-card,
   .project-grid,
   .detail-grid,
@@ -2126,6 +2218,10 @@ dd {
     margin-top: -28px;
   }
 
+  .availability-intro {
+    min-height: auto;
+  }
+
   .section__heading--row {
     align-items: start;
     flex-direction: column;
@@ -2136,6 +2232,10 @@ dd {
   .site-header {
     min-height: 64px;
     padding: 0 16px;
+  }
+
+  .availability-grid {
+    grid-template-columns: 1fr;
   }
 
   .nav-toggle {

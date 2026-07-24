@@ -21,6 +21,7 @@ Portfolio cá nhân dùng để giới thiệu hồ sơ, CV, kỹ năng và các
 - Mục "Tôi đang tìm kiếm" cho cơ hội thực tập Backend .NET, System Analyst, API Testing
 - Kỹ năng backend, database, system analysis, API testing
 - Dự án nổi bật và dự án bài tập học phần
+- Dự án WebBanHangOnline đã có Docker Compose `webthoitrang`, SQL Server và dữ liệu demo
 - CV online, CV PDF, thông tin liên hệ
 - Favicon/avatar và Open Graph để khi chia sẻ link hiển thị đẹp hơn trên Facebook, Zalo, LinkedIn
 

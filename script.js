@@ -17,6 +17,9 @@ const projectCards = [...document.querySelectorAll(".project-card")];
 const depthCards = [
   ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .timeline article, .identity-card, .objective-card, .fit-grid article, .contact-cta, .contact-card"),
 ];
+const tiltCards = [
+  ...document.querySelectorAll(".project-card, .resume-card, .academic-card, .fit-grid article, .identity-card, .objective-card"),
+];
 const shineTargets = [
   ...depthCards,
   ...document.querySelectorAll(".button, .project-actions a, .text-link, .back-link"),
@@ -143,15 +146,16 @@ if (canAnimatePointer) {
     { passive: true },
   );
 
-  projectCards.forEach((card) => {
+  tiltCards.forEach((card) => {
     card.addEventListener("pointermove", (event) => {
       const rect = card.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width - 0.5;
       const y = (event.clientY - rect.top) / rect.height - 0.5;
+      const strength = card.classList.contains("project-card") ? 7 : 4;
 
       card.classList.add("is-tilting");
-      card.style.setProperty("--tilt-x", `${x * 7}deg`);
-      card.style.setProperty("--tilt-y", `${y * -7}deg`);
+      card.style.setProperty("--tilt-x", `${x * strength}deg`);
+      card.style.setProperty("--tilt-y", `${y * -strength}deg`);
       card.style.setProperty("--shine-x", `${(x + 0.5) * 100}%`);
       card.style.setProperty("--shine-y", `${(y + 0.5) * 100}%`);
     });

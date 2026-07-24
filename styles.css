@@ -2,15 +2,15 @@
   --ink: #f6fff9;
   --muted: #a8b8b4;
   --paper: #060807;
-  --panel: rgba(10, 18, 16, 0.78);
-  --line: rgba(170, 255, 218, 0.16);
+  --panel: rgba(8, 14, 13, 0.9);
+  --line: rgba(170, 255, 218, 0.12);
   --accent: #70f0b2;
   --accent-dark: #aafdda;
   --gold: #f2cc55;
   --coral: #ff6f61;
   --navy: #09110f;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
-  --shadow-lift: 0 34px 110px rgba(0, 0, 0, 0.48);
+  --shadow: 0 18px 58px rgba(0, 0, 0, 0.38);
+  --shadow-lift: 0 30px 86px rgba(0, 0, 0, 0.5);
   --glass: rgba(255, 255, 255, 0.055);
   --depth-x: 0px;
   --depth-y: 0px;
@@ -33,12 +33,12 @@ body {
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
-    linear-gradient(rgba(112, 240, 178, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(112, 240, 178, 0.035) 1px, transparent 1px),
-    radial-gradient(circle at 78% 8%, rgba(255, 111, 97, 0.12), transparent 26%),
-    radial-gradient(circle at 14% 24%, rgba(112, 240, 178, 0.12), transparent 24%),
+    linear-gradient(rgba(112, 240, 178, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(112, 240, 178, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 78% 8%, rgba(255, 111, 97, 0.07), transparent 27%),
+    radial-gradient(circle at 14% 24%, rgba(112, 240, 178, 0.08), transparent 25%),
     var(--paper);
-  background-size: 42px 42px, 42px 42px, auto, auto, auto;
+  background-size: 68px 68px, 68px 68px, auto, auto, auto;
   overflow-x: hidden;
 }
 
@@ -48,8 +48,8 @@ body::before {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(120deg, transparent 0 42%, rgba(242, 204, 85, 0.08) 42.2% 42.5%, transparent 42.8%),
-    linear-gradient(300deg, transparent 0 58%, rgba(112, 240, 178, 0.08) 58.2% 58.45%, transparent 58.75%);
+    linear-gradient(120deg, transparent 0 42%, rgba(242, 204, 85, 0.035) 42.2% 42.42%, transparent 42.7%),
+    linear-gradient(300deg, transparent 0 58%, rgba(112, 240, 178, 0.04) 58.2% 58.38%, transparent 58.68%);
   pointer-events: none;
 }
 
@@ -59,11 +59,11 @@ body::after {
   left: var(--cursor-x, 50%);
   top: var(--cursor-y, 28%);
   z-index: -1;
-  width: 420px;
+  width: 360px;
   aspect-ratio: 1;
   background:
-    radial-gradient(circle, rgba(112, 240, 178, 0.18), rgba(242, 204, 85, 0.08) 34%, transparent 68%);
-  opacity: 0.72;
+    radial-gradient(circle, rgba(112, 240, 178, 0.11), rgba(242, 204, 85, 0.04) 34%, transparent 68%);
+  opacity: 0.48;
   pointer-events: none;
   transform: translate(-50%, -50%);
   transition: left 180ms ease-out, top 180ms ease-out;
@@ -90,11 +90,11 @@ body.nav-open {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, transparent 0 49.7%, rgba(112, 240, 178, 0.05) 49.9% 50.1%, transparent 50.3%),
-    linear-gradient(0deg, transparent 0 49.7%, rgba(242, 204, 85, 0.045) 49.9% 50.1%, transparent 50.3%);
-  background-size: 180px 180px;
+    linear-gradient(90deg, transparent 0 49.85%, rgba(112, 240, 178, 0.025) 49.95% 50.05%, transparent 50.15%),
+    linear-gradient(0deg, transparent 0 49.85%, rgba(242, 204, 85, 0.02) 49.95% 50.05%, transparent 50.15%);
+  background-size: 240px 240px;
   mask-image: radial-gradient(circle at center, #000 0 54%, transparent 78%);
-  opacity: 0.7;
+  opacity: 0.38;
   transform: translate3d(calc(var(--depth-x) * -0.24), calc(var(--depth-y) * -0.18), 0);
 }
 
@@ -102,13 +102,13 @@ body.nav-open {
   position: absolute;
   width: clamp(90px, 10vw, 180px);
   aspect-ratio: 1;
-  border: 1px solid rgba(170, 255, 218, 0.13);
+  border: 1px solid rgba(170, 255, 218, 0.075);
   border-radius: 16px;
   background:
-    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.12), transparent 24%),
-    linear-gradient(135deg, rgba(112, 240, 178, 0.08), rgba(255, 111, 97, 0.05));
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.3);
-  opacity: 0.32;
+    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.065), transparent 24%),
+    linear-gradient(135deg, rgba(112, 240, 178, 0.045), rgba(255, 111, 97, 0.028));
+  box-shadow: 0 18px 58px rgba(0, 0, 0, 0.28);
+  opacity: 0.2;
   transform: rotateX(62deg) rotateZ(42deg);
   animation: ambientFloat 14s ease-in-out infinite;
 }
@@ -338,7 +338,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.42;
+  opacity: 0.54;
   mix-blend-mode: screen;
   transform: scale(1.04) translate3d(calc(var(--depth-x) * -0.45), calc(var(--depth-y) * -0.35), 0);
   animation: heroImageIn 1200ms var(--ease-out) both;
@@ -349,10 +349,10 @@ p {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at calc(52% + var(--depth-x)) calc(28% + var(--depth-y)), rgba(112, 240, 178, 0.16), transparent 26%),
-    linear-gradient(90deg, rgba(6, 8, 7, 0.98), rgba(6, 8, 7, 0.76) 46%, rgba(6, 8, 7, 0.24)),
+    radial-gradient(circle at calc(52% + var(--depth-x)) calc(28% + var(--depth-y)), rgba(112, 240, 178, 0.1), transparent 28%),
+    linear-gradient(90deg, rgba(6, 8, 7, 0.94), rgba(6, 8, 7, 0.69) 46%, rgba(6, 8, 7, 0.18)),
     linear-gradient(0deg, var(--paper), transparent 18%),
-    repeating-linear-gradient(90deg, rgba(112, 240, 178, 0.06) 0 1px, transparent 1px 140px);
+    repeating-linear-gradient(90deg, rgba(112, 240, 178, 0.025) 0 1px, transparent 1px 180px);
 }
 
 .hero__scene {
@@ -369,7 +369,7 @@ p {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.82;
+  opacity: 0.7;
   mix-blend-mode: screen;
 }
 
@@ -414,9 +414,9 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(112, 240, 178, 0.1), transparent);
+  background: linear-gradient(180deg, transparent, rgba(112, 240, 178, 0.055), transparent);
   mix-blend-mode: screen;
-  opacity: 0.45;
+  opacity: 0.32;
   transform: translateY(-100%);
   animation: scanHero 6200ms ease-in-out infinite;
 }
@@ -496,9 +496,9 @@ p {
   min-width: 190px;
   border: 1px solid rgba(170, 255, 218, 0.2);
   border-radius: 8px;
-  background: rgba(7, 15, 13, 0.68);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
+  background: rgba(7, 15, 13, 0.76);
+  box-shadow: 0 18px 58px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
   padding: 18px;
   transform-style: preserve-3d;
   animation: floatPanel3d 5200ms ease-in-out infinite;
@@ -586,7 +586,7 @@ p {
   color: #ffffff;
   font-size: clamp(3.1rem, 8vw, 7.2rem);
   line-height: 0.95;
-  text-shadow: 0 0 48px rgba(112, 240, 178, 0.18);
+  text-shadow: 0 0 26px rgba(112, 240, 178, 0.12);
 }
 
 .hero h1::after {
@@ -599,8 +599,8 @@ p {
   z-index: -1;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(112, 240, 178, 0.72), rgba(242, 204, 85, 0.62), rgba(255, 111, 97, 0.52));
-  filter: blur(12px);
-  opacity: 0.7;
+  filter: blur(9px);
+  opacity: 0.52;
   transform-origin: left;
   animation: nameGlow 2600ms ease-in-out infinite;
 }
@@ -825,8 +825,8 @@ p {
   border: 1px solid rgba(170, 255, 218, 0);
   border-radius: 18px;
   background:
-    radial-gradient(circle at var(--section-x) var(--section-y), rgba(112, 240, 178, 0.13), transparent 28%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent 48%, rgba(242, 204, 85, 0.035));
+    radial-gradient(circle at var(--section-x) var(--section-y), rgba(112, 240, 178, 0.075), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.018), transparent 48%, rgba(242, 204, 85, 0.02));
   opacity: 0;
   transform: translateY(24px) scale(0.98);
   transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out), border-color 700ms ease;
@@ -835,7 +835,7 @@ p {
 
 .section.section-in-view::before {
   opacity: 1;
-  border-color: rgba(170, 255, 218, 0.08);
+  border-color: rgba(170, 255, 218, 0.035);
   transform: translateY(0) scale(1);
 }
 
@@ -868,12 +868,8 @@ p {
 }
 
 .section h2 {
-  background: linear-gradient(90deg, #ffffff, var(--accent-dark), var(--gold), #ffffff);
-  background-size: 220% 100%;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: headingSweep 7600ms ease-in-out infinite;
+  color: #f7fff9;
+  text-shadow: 0 0 28px rgba(112, 240, 178, 0.08);
 }
 
 .about__layout,
@@ -904,7 +900,7 @@ p {
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
   transform-style: preserve-3d;
 }
 
@@ -919,14 +915,11 @@ p {
 .contact-card::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: 1px;
   border-radius: inherit;
-  background:
-    linear-gradient(115deg, transparent 24%, rgba(255, 255, 255, 0.13) 42%, transparent 60%),
-    radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 0%), rgba(255, 255, 255, 0.18), transparent 34%);
+  background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 0%), rgba(170, 255, 218, 0.11), transparent 42%);
   opacity: 0;
-  transform: translateX(-34%);
-  transition: opacity 220ms ease, transform 720ms var(--ease-out);
+  transition: opacity 240ms ease;
   pointer-events: none;
 }
 
@@ -940,7 +933,6 @@ p {
 .contact-cta:hover::after,
 .contact-card:hover::after {
   opacity: 1;
-  transform: translateX(0);
 }
 
 .identity-card {
@@ -961,8 +953,10 @@ p {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(112, 240, 178, 0.12), transparent 46%, rgba(255, 111, 97, 0.1));
-  opacity: 0.7;
+  background:
+    linear-gradient(135deg, rgba(112, 240, 178, 0.06), transparent 46%, rgba(255, 111, 97, 0.045)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 42%);
+  opacity: 0.82;
   pointer-events: none;
 }
 
@@ -1239,7 +1233,7 @@ p {
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
   transform-style: preserve-3d;
   transition:
     border-color 220ms ease,
@@ -1257,9 +1251,9 @@ p {
 .objective-card:hover,
 .resume-card:hover,
 .contact-cta:hover {
-  border-color: rgba(170, 255, 218, 0.28);
+  border-color: rgba(170, 255, 218, 0.2);
   box-shadow: var(--shadow-lift);
-  transform: translateY(-7px) translateZ(18px);
+  transform: translateY(-6px) translateZ(20px);
 }
 
 .profile-panel {
@@ -1385,28 +1379,30 @@ dd {
 .project-card__media::after {
   content: "";
   position: absolute;
-  inset: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
+  left: 18%;
+  top: 20%;
+  width: 64%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 16px;
   background:
-    linear-gradient(90deg, transparent 0 48%, rgba(255, 255, 255, 0.18) 49% 51%, transparent 52%),
-    linear-gradient(0deg, transparent 0 48%, rgba(255, 255, 255, 0.14) 49% 51%, transparent 52%);
-  background-size: 44px 44px;
-  opacity: 0.54;
-  transform: rotateX(62deg) rotateZ(42deg) scale(0.72);
+    radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.14), transparent 22%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 54%);
+  opacity: 0.38;
+  transform: rotateX(62deg) rotateZ(42deg) scale(0.74);
   transition: opacity 240ms ease, transform 520ms var(--ease-out);
 }
 
 .project-card:hover .project-card__media::after {
-  opacity: 0.9;
-  transform: rotateX(62deg) rotateZ(42deg) scale(0.86) translateY(-6px);
+  opacity: 0.58;
+  transform: rotateX(62deg) rotateZ(42deg) scale(0.88) translateY(-8px);
 }
 
 .project-card__media::before {
   content: "";
   position: absolute;
   inset: -40%;
-  background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.28), transparent 65%);
+  background: linear-gradient(120deg, transparent 38%, rgba(255, 255, 255, 0.16), transparent 62%);
   transform: translateX(-50%) rotate(12deg);
   transition: transform 700ms var(--ease-out);
 }
@@ -1442,7 +1438,22 @@ dd {
   transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-8px) translateZ(22px);
 }
 
+.resume-card.is-tilting,
+.academic-card.is-tilting,
+.fit-grid article.is-tilting,
+.identity-card.is-tilting,
+.objective-card.is-tilting {
+  transform: perspective(900px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(-6px) translateZ(18px);
+  border-color: rgba(170, 255, 218, 0.2);
+  box-shadow: var(--shadow-lift);
+}
+
 .project-card.is-tilting::after,
+.resume-card.is-tilting::after,
+.academic-card.is-tilting::after,
+.fit-grid article.is-tilting::after,
+.identity-card.is-tilting::after,
+.objective-card.is-tilting::after,
 .resume-card:hover::after,
 .academic-card:hover::after,
 .timeline article:hover::after {
@@ -1716,18 +1727,18 @@ dd {
 
 .reveal {
   opacity: 0;
-  filter: blur(10px);
-  transform: translate3d(0, 56px, -80px) rotateX(8deg) scale(0.96);
+  filter: blur(4px);
+  transform: translate3d(0, 46px, -58px) rotateX(6deg) scale(0.975);
   transition:
-    opacity 820ms var(--ease-out),
-    filter 820ms var(--ease-out),
-    transform 820ms var(--ease-out);
+    opacity 700ms var(--ease-out),
+    filter 700ms var(--ease-out),
+    transform 760ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, filter, transform;
 }
 
 .reveal:nth-child(even) {
-  transform: translate3d(0, 42px, -60px) rotateY(-7deg) scale(0.97);
+  transform: translate3d(0, 36px, -44px) rotateY(-4deg) scale(0.98);
 }
 
 .reveal.is-visible {

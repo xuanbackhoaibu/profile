@@ -130,22 +130,6 @@ updateHeaderState();
 window.addEventListener("scroll", updateHeaderState, { passive: true });
 
 if (canAnimatePointer) {
-  window.addEventListener(
-    "pointermove",
-    (event) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const depthX = ((event.clientX - centerX) / centerX) * 18;
-      const depthY = ((event.clientY - centerY) / centerY) * 14;
-
-      document.body.style.setProperty("--cursor-x", `${event.clientX}px`);
-      document.body.style.setProperty("--cursor-y", `${event.clientY}px`);
-      document.documentElement.style.setProperty("--depth-x", `${depthX.toFixed(2)}px`);
-      document.documentElement.style.setProperty("--depth-y", `${depthY.toFixed(2)}px`);
-    },
-    { passive: true },
-  );
-
   tiltCards.forEach((card) => {
     card.addEventListener("pointermove", (event) => {
       const rect = card.getBoundingClientRect();
